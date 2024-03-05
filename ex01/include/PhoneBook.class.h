@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.h                                        :+:      :+:    :+:   */
+/*   PhoneBook.class.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 16:59:36 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/02/16 17:02:58 by sebasnadu        ###   ########.fr       */
+/*   Created: 2024/02/19 00:07:10 by sebasnadu         #+#    #+#             */
+/*   Updated: 2024/02/19 13:18:59 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEGAPHONE_H
-# define MEGAPHONE_H
+#ifndef PHONEBOOK_CLASS_H
+#define PHONEBOOK_CLASS_H
 
-# include <iostream>
+class PhoneBook {};
 
 #endif

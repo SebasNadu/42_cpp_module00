@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Contact.class.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 11:02:54 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/02/18 14:32:45 by sebasnadu        ###   ########.fr       */
+/*   Created: 2024/02/19 12:56:31 by sebasnadu         #+#    #+#             */
+/*   Updated: 2024/02/19 13:18:12 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef CONTACT_CLASS_H
+# define CONTACT_CLASS_H
 
-void	Scream(char	**av)
-{
-	while (*++av)
-	{
-		for (char *tmp (*av); *tmp; ++tmp)
-			*tmp = std::toupper(*tmp);
-		std::cout << *av;
-	}
-	std::cout << std::endl;
+class Contact {
+public:
+
 }
 
-int	main(int ac, char **av)
-{
-	if (ac == 1)
-		std::cerr << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-	else
-		Scream(av);
-	return (0);
-}
+#endif

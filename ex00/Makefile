@@ -6,7 +6,7 @@
 #    By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 17:59:18 by sebasnadu         #+#    #+#              #
-#    Updated: 2024/02/17 13:59:21 by sebasnadu        ###   ########.fr        #
+#    Updated: 2024/02/18 14:33:24 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ vpath %.cpp $(SRC_DIR)
 vpath %.h $(INC_DIR)
 vpath %.o $(OBJ_DIR)
 
-HEADER					:= megaphone.h
+HEADER					:= 
 SOURCE					:= megaphone.cpp
 OBJECT					:= $(addprefix $(OBJ_DIR)/, $(SOURCE:.cpp=.o))
 
