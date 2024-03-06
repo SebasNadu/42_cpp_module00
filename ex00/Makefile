@@ -6,7 +6,7 @@
 #    By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 17:59:18 by sebasnadu         #+#    #+#              #
-#    Updated: 2024/02/18 14:33:24 by sebasnadu        ###   ########.fr        #
+#    Updated: 2024/03/06 15:32:50 by johnavar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,9 @@ INCLUDE					:= -I$(INC_DIR)
 
 NUM_SRC_FILES		:= $(words $(SOURCE))
 NUM_OBJ_FILES		:= $(words $(OBJECT))
-NUM_TO_COMPILE	:= $(shell expr $(NUM_SRC_FILES) - $(NUM_OBJ_FILES))
-
+NUM_TO_COMPILE	:= $(shell expr $(NUM_SRC_FILES) - $(NUM_OBJ_FILES) + 1)
 ifeq ($(shell test $(NUM_TO_COMPILE) -le 0; echo $$?), 0)
-	NUM_TO_COMPILE	:= $(words $(SOURCE))
+	NUM_TO_COMPILE	:= $(words $(SOURCE)) + 1
 endif
 
 COMPILED_FILES	= 0
@@ -78,7 +77,6 @@ COMPILATION_PCT	= $(shell expr 100 \* $(COMPILED_FILES) / $(NUM_TO_COMPILE))
 all:	$(NAME)
 
 $(NAME):	$(OBJECT)
-	@printf "$(NUM_SRC_FILES)\n"
 	@printf "$(MAGENTA)[$(NAME)] $(DEFAULT)Linking "
 	@printf "($(BLUE)$(NAME)$(DEFAULT))...\n"
 	@$(CPP) $(CPPFLAGS) $(INCLUDE) $^ -o $@
