@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.class.h                                  :+:      :+:    :+:   */
+/*   display.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/19 00:07:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/02/19 13:18:59 by sebasnadu        ###   ########.fr       */
+/*   Created: 2024/03/07 22:22:08 by sebasnadu         #+#    #+#             */
+/*   Updated: 2024/03/08 21:36:02 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_CLASS_H
-#define PHONEBOOK_CLASS_H
+#ifndef DISPLAY_HPP
+#define DISPLAY_HPP
 
-class PhoneBook {};
+#include "colors.hpp"
+#include <chrono>
+#include <iomanip>
+#include <iostream>
+#include <thread>
+
+#define SCREEN_WIDTH 100
+
+void displayWelcomeMessage(void);
+void displayPrompt(void);
+void displayEOFMessage(void);
+void displayExitMessage(void);
+void displayInstructionMessage(void);
+void displayAddTitle(void);
+void displaySearchTitle(void);
 
 #endif

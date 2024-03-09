@@ -1,4 +1,5 @@
 /* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   megaphone.cpp                                      :+:      :+:    :+:   */
@@ -12,22 +13,21 @@
 
 #include <iostream>
 
-void	Scream(char	**av)
-{
-	while (*++av)
-	{
-		for (char *tmp (*av); *tmp; ++tmp)
-			*tmp = std::toupper(*tmp);
-		std::cout << *av;
-	}
-	std::cout << std::endl;
+void scream(char **av) {
+  while (*++av) {
+    for (char *tmp(*av); *tmp; ++tmp)
+      *tmp = std::toupper(*tmp);
+    std::cout << *av;
+    if (*(av + 1) != NULL)
+      std::cout << ' ';
+  }
+  std::cout << std::endl;
 }
 
-int	main(int ac, char **av)
-{
-	if (ac == 1)
-		std::cerr << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-	else
-		Scream(av);
-	return (0);
+int main(int ac, char **av) {
+  if (ac == 1)
+    std::cerr << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+  else
+    scream(av);
+  return (EXIT_SUCCESS);
 }

@@ -29,11 +29,11 @@ SRC_DIR						:= src
 INC_DIR						:= include
 
 vpath %.cpp $(SRC_DIR)
-vpath %.h $(INC_DIR)
+vpath %.hpp $(INC_DIR)
 vpath %.o $(OBJ_DIR)
 
-HEADER						:=
-SOURCE						:= main.cpp
+HEADER						:= display.hpp PhoneBook.class.hpp Contact.class.hpp 
+SOURCE						:= main.cpp display.cpp PhoneBook.class.cpp Contact.class.cpp
 OBJECT						:= $(addprefix $(OBJ_DIR)/, $(SOURCE:.cpp=.o))
 
 ################################################################################
