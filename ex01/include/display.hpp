@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:22:08 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/08 21:36:02 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/09 20:36:17 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ void displayExitMessage(void);
 void displayInstructionMessage(void);
 void displayAddTitle(void);
 void displaySearchTitle(void);
+void displayInputSymbol(void);
+void clearScreen(void);
+void displayMessage(const std::string &msg);
+void displayInputLine(std::string &field);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:07:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/08 20:01:45 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/09 19:21:25 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ public:
   void searchContact(void);
 
 private:
-  Contact _contacts[8];
-  int _index;
   static int const _maxContacts = 8;
+  Contact _contacts[_maxContacts];
+  int _index;
 };
 
 #endif
