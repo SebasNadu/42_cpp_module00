@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:19:35 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/09 23:14:02 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/11 01:20:07 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ void displayInstructionMessage(void) {
 void displayAddTitle(void) {
   std::this_thread::sleep_for(std::chrono::milliseconds(100));
   std::cout << '\r' << std::setw(SCREEN_WIDTH) << " " << '\n';
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
   displayMessage("*********************************************");
   std::this_thread::sleep_for(std::chrono::milliseconds(100));
   displayMessage("*              Add New Contact              *");
@@ -167,8 +166,7 @@ void displayAddTitle(void) {
 
 void displaySearchTitle(void) {
   std::this_thread::sleep_for(std::chrono::milliseconds(100));
-  std::cout << std::setw(SCREEN_WIDTH) << " " << '\n';
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  std::cout << '\r' << std::setw(SCREEN_WIDTH) << " " << '\n';
   displayMessage("*********************************************");
   std::this_thread::sleep_for(std::chrono::milliseconds(100));
   displayMessage("*              Search Contacts              *");
