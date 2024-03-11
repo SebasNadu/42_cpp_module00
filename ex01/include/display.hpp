@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:22:08 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/11 01:19:50 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/11 12:50:28 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <thread>
 
 #define SCREEN_WIDTH 100
+#define DELAY_TIME 100
 
 void displayWelcomeMessage(void);
 void displayPrompt(void);
@@ -32,5 +33,6 @@ void displayInputSymbol(void);
 void clearScreen(void);
 void displayMessage(const std::string &msg);
 void displayInputLine(std::string &field);
+void displayDevMode(void);
 
 #endif

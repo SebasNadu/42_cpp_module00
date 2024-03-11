@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:15:54 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/11 01:19:24 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/11 13:04:41 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ void PhoneBook::addContact(void) {
   clearScreen();
   displayAddTitle();
   if (this->_contacts[this->_index].setData(this->_index) == true) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     displayMessage("Processing data ...");
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME * 5));
     displayMessage("New contact added successfully!");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     this->_index = (this->_index + 1) % this->_maxContacts;
     displayMessage("Press ENTER to return to the main menu");
     displayInputSymbol();
@@ -30,15 +28,29 @@ void PhoneBook::addContact(void) {
     displayEOFMessage();
     std::exit(0);
   } else {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     displayMessage("Contact not added");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     displayMessage("Please try again");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     displayMessage("Press ENTER to return to the main menu");
     displayInputSymbol();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
+  clearScreen();
+}
+
+void PhoneBook::addAllContacts(void) {
+  std::string data("Contact#");
+
+  clearScreen();
+  displayDevMode();
+  displayMessage("Adding all contacts ...");
+  std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME * 5));
+  for (int i(0); i < this->_maxContacts; i++) {
+    this->_contacts[i].setAllData(i, data + std::to_string(i + 1));
+  }
+  displayMessage("All contacts added succefully!");
+  displayMessage("Press ENTER to return to the main menu");
+  displayInputSymbol();
+  std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   clearScreen();
 }
 
@@ -48,32 +60,15 @@ void PhoneBook::_printContactsTable(void) const {
     if (!this->_contacts[i].empty())
       this->_contacts[i].printTableRow();
   };
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
   displayMessage("+----------+----------+----------+----------+");
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
   displayMessage("");
 }
 
-void PhoneBook::searchContact(void) {
+void PhoneBook::_searchContactREPL(void) {
   std::string input;
   int const offset(1);
 
-  clearScreen();
-  displaySearchTitle();
-  if (this->_contacts[0].empty()) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    displayMessage("Your PhoneBook is empty");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    displayMessage("Add a new contact to start using the search feature");
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    displayMessage("Press ENTER to return to the main menu");
-    displayInputSymbol();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    return;
-  };
-  this->_printContactsTable();
   while (1) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     displayMessage(
         "Please enter the contact index to display the full information");
     displayMessage("or press ENTER to return to the main menu");
@@ -92,13 +87,25 @@ void PhoneBook::searchContact(void) {
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       break;
     } else {
-      std::this_thread::sleep_for(std::chrono::milliseconds(100));
-      std::cout << std::setw(SCREEN_WIDTH) << ' ' << '\n';
-      std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      displayMessage("");
       displayMessage("Invalid index");
-      std::this_thread::sleep_for(std::chrono::milliseconds(100));
       displayMessage("");
     }
   }
+}
+
+void PhoneBook::searchContact(void) {
+  clearScreen();
+  displaySearchTitle();
+  if (this->_contacts[0].empty()) {
+    displayMessage("Your PhoneBook is empty");
+    displayMessage("Add a new contact to start using the search feature");
+    displayMessage("Press ENTER to return to the main menu");
+    displayInputSymbol();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    return;
+  };
+  this->_printContactsTable();
+  this->_searchContactREPL();
   clearScreen();
 }

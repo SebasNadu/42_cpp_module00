@@ -6,7 +6,7 @@
 #    By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 17:59:18 by sebasnadu         #+#    #+#              #
-#    Updated: 2024/03/06 15:32:50 by johnavar         ###   ########.fr        #
+#    Updated: 2024/03/11 13:33:42 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,9 +62,9 @@ INCLUDE					:= -I$(INC_DIR)
 
 NUM_SRC_FILES		:= $(words $(SOURCE))
 NUM_OBJ_FILES		:= $(words $(OBJECT))
-NUM_TO_COMPILE	:= $(shell expr $(NUM_SRC_FILES) - $(NUM_OBJ_FILES) + 1)
+NUM_TO_COMPILE	:= $(shell expr $(NUM_SRC_FILES) - $(NUM_OBJ_FILES))
 ifeq ($(shell test $(NUM_TO_COMPILE) -le 0; echo $$?), 0)
-	NUM_TO_COMPILE	:= $(words $(SOURCE)) + 1
+	NUM_TO_COMPILE	:= $(words $(SOURCE))
 endif
 
 COMPILED_FILES	= 0
@@ -77,7 +77,7 @@ COMPILATION_PCT	= $(shell expr 100 \* $(COMPILED_FILES) / $(NUM_TO_COMPILE))
 all:	$(NAME)
 
 $(NAME):	$(OBJECT)
-	@printf "$(MAGENTA)[$(NAME)] $(DEFAULT)Linking "
+	@printf "\n$(MAGENTA)[$(NAME)] $(DEFAULT)Linking "
 	@printf "($(BLUE)$(NAME)$(DEFAULT))...\n"
 	@$(CPP) $(CPPFLAGS) $(INCLUDE) $^ -o $@
 	@printf "\r%100s\r$(MAGENTA)[$(NAME)] $(GREEN)Compilation success "
@@ -87,7 +87,7 @@ $(OBJ_DIR)/%.o:	%.cpp $(HEADER) | $(OBJ_DIR)
 	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
 	@printf "$(MAGENTA)\r%100s\r[$(NAME)] $(GREEN)[ %d/%d (%d%%) ]" \
 			"" $(COMPILED_FILES) $(NUM_TO_COMPILE) $(COMPILATION_PCT) 
-	@printf " $(DEFAULT)Compiling ($(BLUE)$<$(DEFAULT))...\n"
+	@printf " $(DEFAULT)Compiling ($(BLUE)$<$(DEFAULT))..."
 	@$(CPP) $(CPPFLAGS) $(INCLUDE) -c $< -o $@
 
 $(OBJ_DIR):

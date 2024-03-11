@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 00:07:10 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/11 00:58:59 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/11 13:03:37 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "Contact.class.hpp"
 #include <limits>
+
 class PhoneBook {
 public:
   PhoneBook() : _index(0){};
@@ -22,6 +23,7 @@ public:
 
   void addContact(void);
   void searchContact(void);
+  void addAllContacts(void);
 
 private:
   static int const _maxContacts = 8;
@@ -29,6 +31,7 @@ private:
   int _index;
 
   void _printContactsTable(void) const;
+  void _searchContactREPL(void);
 };
 
 #endif

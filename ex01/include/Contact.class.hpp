@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:56:31 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/11 00:29:18 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/11 12:39:58 by sebasnadu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ public:
   Contact(void){};
   ~Contact(void){};
 
-  bool empty(void) const;
+  inline bool empty(void) const {
+    return this->_fieldsData[this->Index].empty();
+  };
   bool setData(int id);
+  void setAllData(int index, std::string const &data);
   void printTableHeader(void) const;
   void printTableRow(void) const;
   void printContactData(void) const;
