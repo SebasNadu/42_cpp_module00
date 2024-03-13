@@ -6,11 +6,12 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:08:53 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/11 12:40:20 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/13 16:17:36 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Contact.class.hpp"
+#include "../include/PhoneBook.class.hpp"
 #include "../include/display.hpp"
 
 std::string Contact::_fieldsName[Contact::FieldsMax] = {
@@ -37,7 +38,7 @@ bool Contact::setData(int id) {
         return false;
     }
   }
-  this->_fieldsData[this->Index] = std::to_string(id + 1);
+  this->_fieldsData[this->Index] = PhoneBook::to_string(id + 1);
   for (int i(this->FirstName); i < this->FieldsMax; i++) {
     displayInputLine(this->_fieldsName[i]);
     while (!(std::getline(std::cin, this->_fieldsData[i])) ||
@@ -55,17 +56,17 @@ bool Contact::setData(int id) {
 }
 
 void Contact::setAllData(int index, std::string const &data) {
-  this->_fieldsData[this->Index] = std::to_string(index + 1);
+  this->_fieldsData[this->Index] = PhoneBook::to_string(index + 1);
   for (int i(this->FirstName); i < this->FieldsMax; i++) {
     this->_fieldsData[i] = data;
   }
 }
 
 void Contact::printTableHeader(void) const {
-  std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME));
+  usleep(DELAY_TIME);
   std::cout << std::setw(SCREEN_WIDTH) << " " << '\n';
   displayMessage("+----------+----------+----------+----------+");
-  std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME));
+  usleep(DELAY_TIME);
   std::cout << std::setw(SCREEN_WIDTH) << ' ';
   std::cout << '\r' << std::setw((SCREEN_WIDTH - 45) / 2) << ' ';
   for (int i(this->Index); i <= this->Nickname; i++) {
@@ -76,7 +77,7 @@ void Contact::printTableHeader(void) const {
 }
 
 void Contact::printTableRow(void) const {
-  std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME));
+  usleep(DELAY_TIME);
   std::cout << std::setw(SCREEN_WIDTH) << ' ';
   std::cout << '\r' << std::setw((SCREEN_WIDTH - 45) / 2) << ' ';
   for (int i(this->Index); i <= this->Nickname; i++) {
@@ -92,7 +93,7 @@ void Contact::printTableRow(void) const {
 }
 
 void Contact::printContactData(void) const {
-  std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME));
+  usleep(DELAY_TIME);
   std::cout << std::setw(SCREEN_WIDTH) << ' ' << '\n';
   for (int i(this->Index); i < this->FieldsMax; i++) {
     std::string line(this->_fieldsName[i]);
@@ -100,6 +101,6 @@ void Contact::printContactData(void) const {
     line.append(this->_fieldsData[i]);
     displayMessage(line);
   }
-  std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME));
+  usleep(DELAY_TIME);
   std::cout << std::setw(SCREEN_WIDTH) << ' ' << '\n';
 }

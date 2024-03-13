@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:15:54 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/11 13:04:41 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/13 16:17:16 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void PhoneBook::addContact(void) {
   displayAddTitle();
   if (this->_contacts[this->_index].setData(this->_index) == true) {
     displayMessage("Processing data ...");
-    std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME * 5));
+    usleep(DELAY_TIME);
     displayMessage("New contact added successfully!");
     this->_index = (this->_index + 1) % this->_maxContacts;
     displayMessage("Press ENTER to return to the main menu");
@@ -26,7 +26,7 @@ void PhoneBook::addContact(void) {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   } else if (std::cin.eof()) {
     displayEOFMessage();
-    std::exit(0);
+    exit(0);
   } else {
     displayMessage("Contact not added");
     displayMessage("Please try again");
@@ -43,9 +43,9 @@ void PhoneBook::addAllContacts(void) {
   clearScreen();
   displayDevMode();
   displayMessage("Adding all contacts ...");
-  std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_TIME * 5));
+  usleep(DELAY_TIME);
   for (int i(0); i < this->_maxContacts; i++) {
-    this->_contacts[i].setAllData(i, data + std::to_string(i + 1));
+    this->_contacts[i].setAllData(i, data + PhoneBook::to_string(i + 1));
   }
   displayMessage("All contacts added succefully!");
   displayMessage("Press ENTER to return to the main menu");
@@ -76,12 +76,12 @@ void PhoneBook::_searchContactREPL(void) {
     std::getline(std::cin, input);
     if (std::cin.eof()) {
       displayEOFMessage();
-      std::exit(0);
+      exit(0);
     } else if (input == "") {
       break;
     } else if (input.length() == 1 && input[0] >= '1' && input[0] <= '8' &&
-               !this->_contacts[std::stoi(input) - offset].empty()) {
-      this->_contacts[std::stoi(input) - offset].printContactData();
+               !this->_contacts[PhoneBook::stoi(input) - offset].empty()) {
+      this->_contacts[PhoneBook::stoi(input) - offset].printContactData();
       displayMessage("Press ENTER to return to the main menu");
       displayInputSymbol();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -108,4 +108,17 @@ void PhoneBook::searchContact(void) {
   this->_printContactsTable();
   this->_searchContactREPL();
   clearScreen();
+}
+
+int PhoneBook::stoi(std::string &s) {
+  int i;
+  std::istringstream(s) >> i;
+  return i;
+}
+
+template <typename T> std::string PhoneBook::to_string(const T &value) {
+  std::ostringstream oss;
+
+  oss << value;
+  return oss.str();
 }

@@ -29,5 +29,5 @@ int main(int ac, char **av) {
     std::cerr << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
   else
     scream(av);
-  return (EXIT_SUCCESS);
+  return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:22:08 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/11 12:50:28 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/13 15:23:45 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 #define DISPLAY_HPP
 
 #include "colors.hpp"
-#include <chrono>
 #include <iomanip>
 #include <iostream>
-#include <thread>
+#include <unistd.h>
 
 #define SCREEN_WIDTH 100
-#define DELAY_TIME 100
+#define DELAY_TIME 1000
 
 void displayWelcomeMessage(void);
 void displayPrompt(void);

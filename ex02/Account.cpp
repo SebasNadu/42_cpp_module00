@@ -6,7 +6,7 @@
 /*   By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:27:40 by sebasnadu         #+#    #+#             */
-/*   Updated: 2024/03/13 14:18:09 by sebasnadu        ###   ########.fr       */
+/*   Updated: 2024/03/13 16:40:54 by johnavar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ Account::Account(int initial_deposit)
 }
 
 void Account::_displayTimestamp() {
-  std::time_t timestamp = std::time(nullptr);
-  std::tm *local = localtime(&timestamp);
+  std::time_t timestamp = std::time(0);
+  std::tm *local = std::localtime(&timestamp);
 
-  std::cout << '[' << std::put_time(local, "%Y%m%d_%H%M%S") << "] ";
+  std::cout << '[' << local->tm_year + 1900 << std::setw(2) << std::setfill('0')
+            << local->tm_mon + 1 << std::setw(2) << std::setfill('0')
+            << local->tm_mday << '_' << local->tm_hour << local->tm_min
+            << local->tm_sec << "] ";
 }
 
 void Account::displayAccountsInfos(void) {
