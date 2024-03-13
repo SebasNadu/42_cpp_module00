@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/13 11:02:33 by sebasnadu         #+#    #+#              #
-#    Updated: 2024/03/13 13:14:57 by sebasnadu        ###   ########.fr        #
+#    Created: 2024/03/13 12:24:26 by sebasnadu         #+#    #+#              #
+#    Updated: 2024/03/13 14:30:16 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,89 +14,87 @@
 ##                                   COLORS                                   ##
 ################################################################################
 
-DEFAULT						:= \033[0;39m
-GRAY 							:= \033[0;90m
-RED 							:= \033[0;91m
-GREEN	 						:= \033[0;92m
-YELLOW 						:= \033[0;93m
-BLUE 							:= \033[0;94m
-MAGENTA						:= \033[0;95m
-CYAN							:= \033[0;96m
-WHITE	 						:= \033[0;97m
+DEFAULT     := \033[0;39m
+GRAY        := \033[0;90m
+RED         := \033[0;91m
+GREEN       := \033[0;92m
+YELLOW      := \033[0;93m
+BLUE        := \033[0;94m
+MAGENTA     := \033[0;95m
+CYAN        := \033[0;96m
+WHITE       := \033[0;97m
 	
 ################################################################################
-##                                 PHONEBOOK                                  ##
+##                                   TESTS                                    ##
 ################################################################################
 
-NAME							:= phonebook
+NAME							:= tests
 CPP								:= c++
-RM 								:= rm -rf
-
+RM								:= rm -rf
+	
 ################################################################################
 ##                                DIRECTORIES                                 ##
 ################################################################################
 
 OBJ_DIR						:= obj
-SRC_DIR						:= src
-INC_DIR						:= include
+SRC_DIR						:= .
+INC_DIR						:= .
 
 vpath %.cpp $(SRC_DIR)
 vpath %.hpp $(INC_DIR)
 vpath %.o $(OBJ_DIR)
 
-HEADER						:= display.hpp PhoneBook.class.hpp Contact.class.hpp 
-SOURCE						:= main.cpp display.cpp PhoneBook.class.cpp Contact.class.cpp
+HEADER						:= Account.hpp
+SOURCE						:= tests.cpp Account.cpp
 OBJECT						:= $(addprefix $(OBJ_DIR)/, $(SOURCE:.cpp=.o))
-
+	
 ################################################################################
 ##                                   FLAGS                                    ##
 ################################################################################
 
-CPPFLAGS					= -Wall -Wextra -Werror -std=c++98
-ifdef DEV
-	CPPFLAGS				+= -g3 -fsanitize=address -DDEV
-endif
+CPPFLAGS					:= -Wall -Wextra -Werror -std=c++98
 INCLUDE						:= -I$(INC_DIR)
-
+	
 ################################################################################
 ##                                PROGRESS_BAR                                ##
 ################################################################################
 
 NUM_SRC_FILES			:= $(words $(SOURCE))
 NUM_OBJ_FILES			:= $(words $(OBJECT))
-NUM_TO_COMPILE		:= $(shell expr $(NUM_SRC_FILES) - $(NUM_OBJ_FILES))
+NUM_TO_COMPILE		= $(shell expr $(NUM_SRC_FILES) - $(NUM_OBJ_FILES))
 
 ifeq ($(shell test $(NUM_TO_COMPILE) -le 0; echo $$?), 0)
-	NUM_TO_COMPILE	:= $(words $(SOURCE))
+	NUM_TO_COMPILE	= $(NUM_SRC_FILES)
 endif
 
 COMPILED_FILES		= 0
 COMPILATION_PCT		= $(shell expr 100 \* $(COMPILED_FILES) / $(NUM_TO_COMPILE))
-
+	
 ################################################################################
 ##                                COMPILATION                                 ##
 ################################################################################
 
-all:	$(NAME)
+all: $(NAME)
 
-$(NAME):	$(OBJECT)
+$(NAME): $(OBJECT)
 	@printf "\n$(MAGENTA)[$(NAME)] $(DEFAULT)Linking "
 	@printf "($(BLUE)$(NAME)$(DEFAULT))..."
 	@$(CPP) $(CPPFLAGS) $(INCLUDE) $^ -o $@
 	@printf "\r%100s\r$(MAGENTA)[$(NAME)] $(GREEN)Compilation success "
 	@printf "🎉!$(DEFAULT)\n"
 
-$(OBJ_DIR)/%.o:	%.cpp $(HEADER) | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.cpp $(HEADER) | $(OBJ_DIR)
 	@$(eval COMPILED_FILES = $(shell expr $(COMPILED_FILES) + 1))
 	@printf "$(MAGENTA)\r%100s\r[$(NAME)] $(GREEN)[ %d/%d (%d%%) ]" \
 			"" $(COMPILED_FILES) $(NUM_TO_COMPILE) $(COMPILATION_PCT) 
 	@printf " $(DEFAULT)Compiling ($(BLUE)$<$(DEFAULT))..."
 	@$(CPP) $(CPPFLAGS) $(INCLUDE) -c $< -o $@
 
+
 $(OBJ_DIR):
 	@printf "$(MAGENTA)[$(NAME)] $(DEFAULT)Creating objects directory "
 	@printf "($(BLUE)$(OBJ_DIR)$(DEFAULT))..."
-	@mkdir -p $@
+	@mkdir -p $(OBJ_DIR)
 	@printf "\r%100s\r$(MAGENTA)[$(NAME)] $(DEFAULT)($(BLUE)$(OBJ_DIR)/$(DEFAULT)) "
 	@printf "Created successfully!\n"
 
@@ -116,4 +114,13 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run: $(NAME)
+	./tests > new_log.txt
+
+diff: run
+	cat 19920104_091532.log | cut -d ' ' -f2 > log1
+	cat new_log.txt | cut -d ' ' -f2 > log2
+	diff log1 log2 > diff || true
+	rm new_log.txt log1 log2
+
+.PHONY: all clean fclean re run diff

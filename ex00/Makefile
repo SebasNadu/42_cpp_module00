@@ -6,7 +6,7 @@
 #    By: sebasnadu <johnavar@student.42berlin.de>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/16 17:59:18 by sebasnadu         #+#    #+#              #
-#    Updated: 2024/03/11 13:33:42 by sebasnadu        ###   ########.fr        #
+#    Updated: 2024/03/13 13:16:15 by sebasnadu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJECT)
 	@printf "\n$(MAGENTA)[$(NAME)] $(DEFAULT)Linking "
-	@printf "($(BLUE)$(NAME)$(DEFAULT))...\n"
+	@printf "($(BLUE)$(NAME)$(DEFAULT))..."
 	@$(CPP) $(CPPFLAGS) $(INCLUDE) $^ -o $@
 	@printf "\r%100s\r$(MAGENTA)[$(NAME)] $(GREEN)Compilation success "
 	@printf "🎉!$(DEFAULT)\n"
@@ -92,19 +92,21 @@ $(OBJ_DIR)/%.o:	%.cpp $(HEADER) | $(OBJ_DIR)
 
 $(OBJ_DIR):
 	@printf "$(MAGENTA)[$(NAME)] $(DEFAULT)Creating objects directory "
-	@printf "($(BLUE)$(OBJ_DIR)$(DEFAULT))...\n"
+	@printf "($(BLUE)$(OBJ_DIR)$(DEFAULT))..."
 	@mkdir -p $@
+	@printf "\r%100s\r$(MAGENTA)[$(NAME)] $(DEFAULT)($(BLUE)$(OBJ_DIR)/$(DEFAULT)) "
+	@printf "Created successfully!\n"
 
 clean:
 	@printf "$(MAGENTA)[$(NAME)] $(DEFAULT)Cleaning up objects files in "
-	@printf "($(RED)$(OBJ_DIR)$(DEFAULT))...\n"
+	@printf "($(RED)$(OBJ_DIR)$(DEFAULT))..."
 	@$(RM) $(OBJ_DIR)
 	@printf "\r%100s\r$(MAGENTA)[$(NAME)] $(YELLOW)Objects clean success "
 	@printf "🧹🧹$(DEFAULT)\n"
 
 fclean: clean
 	@printf "$(MAGENTA)[$(NAME)] $(DEFAULT)Cleaning up "
-	@printf "($(RED)$(NAME)$(DEFAULT))...\n"
+	@printf "($(RED)$(NAME)$(DEFAULT))..."
 	@$(RM) $(NAME)
 	@printf "\r%100s\r$(MAGENTA)[$(NAME)] $(YELLOW)Full clean success "
 	@printf "🧹🧹$(DEFAULT)\n"
